@@ -25,14 +25,8 @@ for i in l:
     elif i > target: # Cleans the array of any lingering impossible solutions before heavy iteration to speed it up.
         del i
     else:
-        for pair in l:
-            if l.index(i) == l.index(pair): # Prevents a given value from testing against itself.
-                continue
-            elif target == i + pair:
-                solutions.append([i, pair])
-                del pair
-            else:
-                continue
+        if target - i in l:
+            solutions.append([i, target - i]) # Faster solution than original.
 
 for i in solutions: # Removes duplicates so that only unique solutions are ultimately returned.
     if type(i) is list:
